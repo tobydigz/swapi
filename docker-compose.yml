@@ -1,0 +1,21 @@
+version: "3"
+services:
+  app:
+    container_name: documenthub
+    image: documenthub
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - mssql
+    environment:
+      ACCEPT_EULA: mssql:Y
+      SA_PASSWORD: mssql:dev12345678
+
+  mssql:
+    image: microsoft/mssql-server-linux
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: B]nf{r6P?n
