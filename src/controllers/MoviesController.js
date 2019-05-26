@@ -37,8 +37,8 @@ exports.getMovies = async (req, res) => {
     movies.sort(Utils.compareValues('release_date'));
 
     return res.status(200).send({
+        previous: Utils.getPageFromUrl(previous),
+        next: Utils.getPageFromUrl(next),
         movies,
-        previous,
-        next,
     });
 };
