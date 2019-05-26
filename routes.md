@@ -14,11 +14,13 @@ Method | URL
 GET | api/swapi/v1/movies
 
 #### Request Parameter
+
 ParamType| Name | Type | description
 -------- | ---- | ---- |  -----------
 Query | page | int | Page Number
 
 #### Response Object
+
 Name | Type | description
 ---- | ---- |  -----------
 movies | array | List object containing **Movie** objects
@@ -34,6 +36,7 @@ Method | URL
 GET | api/swapi/v1/characters
 
 #### Request Parameter
+
 ParamType| Name | Type | description
 -------- | ---- | ---- |  -----------
 Query | page | int | Page Number
@@ -42,6 +45,7 @@ Query | order | string | Accepts ASC or DSC as order for sort. Ascending or Desc
 Query | filter | string | Accepts male, female or unknown to filter by gender
 
 #### Response Object
+
 Name | Type | description
 ---- | ---- |  -----------
 characters | array | List object containing **Character** objects
@@ -59,12 +63,14 @@ Method | URL
 GET | api/swapi/v1/comments
 
 #### Request Parameter
+
 ParamType| Name | Type | description
 -------- | ---- | ---- |  -----------
 Query | page | int | Page Number
 Query | limit | int | maximum number of comments to retrieve
 
 #### Response Object
+
 Name | Type | description
 ---- | ---- |  -----------
 comments | array | List object containing **Comment** objects
@@ -83,8 +89,8 @@ release_date | string | The ISO 8601 date format of film release at original cre
 opening_crawl | string | The opening paragraphs at the beginning of this film
 comment_count | int | The number of comments for this film
 
-
 ### Character
+
 Name | Type | description
 ---- | ---- |  -----------
 id | int | The id of this person
@@ -94,6 +100,7 @@ mass | double(nullable) | The mass of the person in kilograms. Null if this valu
 gender | string(nullable) | The gender of this person. Either "Male", "Female" or null if the person does not have a gender
 
 ### Comment
+
 Name | Type | description
 ---- | ---- | -----------
 id | string | The id of this comment
@@ -102,20 +109,16 @@ content | string | The contents of this comment
 ip_address | string | The IP Address of the poster
 
 ### Height
+
 Name | Type | description
 ---- | ---- | -----------
-height_cm | int | Height in cm
-date | string | The ISO 8601 date format of the comment post date 
-content | string | The contents of this comment
-ip_address | string | The IP Address of the poster
-
+type | string | Unit Length Type
+value | double | Height Value
+text_value | string | Human understandable height value
 
 #### Error
+
 Name | Type | description
 ---- | ---- | -----------
 code | string | Short code for the error
 message | string | Error description
-
-
-
-
