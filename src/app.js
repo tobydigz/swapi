@@ -33,7 +33,7 @@ app.use(morgan(loggerFormat, {
 }));
 
 app.use((req, res, next) => {
-    logger.logCustomRequest(req);
+    logger.logRequest(req);
     next();
 });
 
