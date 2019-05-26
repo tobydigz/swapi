@@ -12,3 +12,7 @@ const fetchData = async (path, queryObject) => {
     };
     return request(options);
 };
+
+module.exports = {
+    fetchData,
+};
