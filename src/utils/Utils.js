@@ -20,15 +20,23 @@ const compareValues = (key, order = 'asc') => (a, b) => {
     );
 };
 
-const filterValues = (key, filter) => (object) => {
-    if (!Object.prototype.hasOwnProperty.call(object, key)) {
-        return false;
+const filterCharacterByGender = (filter, shouldFilter, character) => {
+    if (!shouldFilter) {
+        return true;
     }
 
-    const varA = (typeof object[key] === 'string')
-        ? object[key].toUpperCase() : object[key];
+    const {
+        gender,
+    } = character;
 
-    return varA.toLowerCase() === filter.toLowerCase();
+
+    if (filter === 'unknown' && gender === null) {
+        return true;
+    }
+    if (!gender) {
+        return false;
+    }
+    return filter.toLowerCase() === gender.toLowerCase();
 };
 
 const cleanSwapiUrl = (url) => {
@@ -52,8 +60,20 @@ const cleanSwapiUrl = (url) => {
     return pathItem;
 };
 
+const getPageFromUrl = (url) => {
+    if (!url) {
+        return null;
+    }
+    const urlObject = new URL(url);
+
+    const page = urlObject.searchParams.get('page');
+
+    return page || null;
+};
+
 module.exports = {
     compareValues,
-    filterValues,
+    filterCharacterByGender,
     cleanSwapiUrl,
+    getPageFromUrl,
 };

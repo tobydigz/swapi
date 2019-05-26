@@ -19,6 +19,7 @@ exports.getCharacters = async (req, res) => {
         order,
         filter,
     } = req.query;
+    const shouldFilter = !!filter;
     const path = 'people';
 
     const queryObject = {
@@ -29,7 +30,7 @@ exports.getCharacters = async (req, res) => {
         results,
         next,
         previous,
-    } = request.fetchData(path, queryObject);
+    } = await request.fetchData(path, queryObject);
 
     const characters = [];
 
@@ -48,14 +49,17 @@ exports.getCharacters = async (req, res) => {
             mass,
             gender: resolveGender(gender),
         };
-        characters.push(character);
+        if (Utils.filterCharacterByGender(filter, shouldFilter, character)) {
+            characters.push(character);
+        }
     });
 
     characters.sort(Utils.compareValues(sort, order));
 
     return res.status(200).send({
-        characters: characters.filter(Utils.filterValues('gender', filter)),
-        previous,
-        next,
+        previous: Utils.getPageFromUrl(previous),
+        next: Utils.getPageFromUrl(next),
+        count: characters.length,
+        characters,
     });
 };
