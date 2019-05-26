@@ -5,6 +5,7 @@ const addRequestId = require('express-request-id')();
 const config = require('config');
 const errorHandler = require('./handlers/ErrorHandler');
 const logger = require('./utils/logger');
+const routes = require('./routes/index');
 
 const app = express();
 
@@ -35,6 +36,9 @@ app.use((req, res, next) => {
     logger.logCustomRequest(req);
     next();
 });
+
+app.use('/api/swapi/v1/',
+    routes);
 
 app.use(errorHandler.notFound);
 

@@ -12,7 +12,7 @@ const resolveGender = (gender) => {
     return null;
 };
 
-exports.getMovies = async (req, res) => {
+exports.getCharacters = async (req, res) => {
     const {
         page,
         sort,
