@@ -14,7 +14,7 @@ exports.getMovies = async (req, res) => {
         results,
         next,
         previous,
-    } = request.fetchData(path, queryObject);
+    } = await request.fetchData(path, queryObject);
 
     const movies = [];
 
