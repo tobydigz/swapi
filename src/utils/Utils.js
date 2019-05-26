@@ -71,9 +71,21 @@ const getPageFromUrl = (url) => {
     return page || null;
 };
 
+const cmToFeet = (height) => {
+    const realFeet = ((height * 0.393700) / 12);
+    const feet = Math.floor(realFeet);
+    const inches = Math.round((realFeet - feet) * 12);
+    return {
+        type: 'Feet',
+        value: realFeet,
+        text_value: `${feet}ft and ${inches} inches`,
+    };
+};
+
 module.exports = {
     compareValues,
     filterCharacterByGender,
     cleanSwapiUrl,
     getPageFromUrl,
+    cmToFeet,
 };

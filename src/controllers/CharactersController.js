@@ -12,6 +12,9 @@ const resolveGender = (gender) => {
     return null;
 };
 
+const resolveHeight = height => ((height === 'unknown') ? null : height);
+const resolveMass = mass => ((mass === 'unknown') ? null : mass);
+
 exports.getCharacters = async (req, res) => {
     const {
         page,
@@ -33,7 +36,7 @@ exports.getCharacters = async (req, res) => {
     } = await request.fetchData(path, queryObject);
 
     const characters = [];
-
+    let totalHeight = 0;
     results.forEach((result) => {
         const {
             name,
@@ -45,21 +48,31 @@ exports.getCharacters = async (req, res) => {
         const character = {
             name,
             id: Utils.cleanSwapiUrl(url),
-            height,
-            mass,
+            height: resolveHeight(height),
+            mass: resolveMass(mass),
             gender: resolveGender(gender),
         };
         if (Utils.filterCharacterByGender(filter, shouldFilter, character)) {
             characters.push(character);
+            totalHeight += Number(character.height);
         }
     });
 
     characters.sort(Utils.compareValues(sort, order));
 
+    const feetHeight = Utils.cmToFeet(totalHeight);
+    const cmHeight = {
+        type: 'cm',
+        value: totalHeight,
+        text_value: `${totalHeight} cm`,
+    };
+    const heights = [feetHeight, cmHeight];
+
     return res.status(200).send({
         previous: Utils.getPageFromUrl(previous),
         next: Utils.getPageFromUrl(next),
         count: characters.length,
+        heights,
         characters,
     });
 };
