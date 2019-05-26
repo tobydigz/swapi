@@ -10,7 +10,7 @@ const {
 router.get('/movies',
     catchErrors(MovieController.getMovies));
 
-router.get('characters',
+router.get('/characters',
     catchErrors(CharactersController.getCharacters));
 
 module.exports = router;
