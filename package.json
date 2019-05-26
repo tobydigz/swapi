@@ -32,8 +32,12 @@
     "express-request-id": "^1.4.1",
     "express-validator": "^5.3.1",
     "morgan": "^1.9.1",
+    "node-cache-promise": "^1.0.0",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.2",
     "request": "^2.88.0",
-    "request-promise-native": "^1.0.7"
+    "request-promise-native": "^1.0.7",
+    "sequelize": "^5.8.6"
   },
   "husky": {
     "hooks": {
