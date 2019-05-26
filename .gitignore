@@ -71,5 +71,8 @@ variables.env.now
 # IntelliJ
 .idea
 
+# Visual Studio Code
+.vscode
+
 # Docker
 docker-compose.override.yml
