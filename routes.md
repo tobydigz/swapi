@@ -103,8 +103,9 @@ gender | string(nullable) | The gender of this person. Either "Male", "Female" o
 
 Name | Type | description
 ---- | ---- | -----------
-id | string | The id of this comment
-date | string | The ISO 8601 date format of the comment post date 
+id | int | The id of this comment
+movie_id | int | The id of the movie the comment belongs to
+created_at | string | The ISO 8601 date format of the comment post date
 content | string | The contents of this comment
 ip_address | string | The IP Address of the poster
 
