@@ -66,7 +66,30 @@ GET | api/swapi/v1/comments
 
 ParamType| Name | Type | description
 -------- | ---- | ---- |  -----------
-Query | page | int | Page Number
+Query | offset | int | Number of comments to skip while fetching
+Query | limit | int | maximum number of comments to retrieve
+
+#### Response Object
+
+Name | Type | description
+---- | ---- |  -----------
+comments | array | List object containing **Comment** objects
+next | int(nullable) | Next page number
+previous | int(nullable) | Previous Page Number
+
+### Get Comments For Movie
+
+This endpoint retrieves the list of all Comments for a particular movie
+
+Method | URL
+------ | ---
+GET | api/swapi/v1/movie/:id/comments/
+
+#### Request Parameter
+
+ParamType| Name | Type | description
+-------- | ---- | ---- |  -----------
+Query | offset | int | Number of comments to skip while fetching
 Query | limit | int | maximum number of comments to retrieve
 
 #### Response Object
@@ -121,5 +144,4 @@ text_value | string | Human understandable height value
 
 Name | Type | description
 ---- | ---- | -----------
-code | string | Short code for the error
 message | string | Error description
