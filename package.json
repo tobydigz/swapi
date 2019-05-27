@@ -12,7 +12,6 @@
     "lint": "eslint src",
     "fix": "eslint src --fix",
     "test": "tap test",
-    "database-start": "",
     "docker-dev": "docker-compose up --build",
     "heroku-postbuild": "yarn install; npx sequelize-cli db:migrate "
   },
@@ -39,7 +38,8 @@
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
     "sequelize": "^5.8.6",
-    "sequelize-cli": "^5.4.0"
+    "sequelize-cli": "^5.4.0",
+    "umzug": "^2.2.0"
   },
   "husky": {
     "hooks": {
@@ -47,7 +47,6 @@
     }
   },
   "engines": {
-    "node": "11.8.0",
-    "yarn": "1.15.2"
+    "node": "11.8.0"
   }
 }
