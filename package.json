@@ -13,7 +13,7 @@
     "fix": "eslint src --fix",
     "test": "tap test",
     "docker-dev": "docker-compose up --build",
-    "heroku-postbuild": "yarn install; npx sequelize-cli db:migrate "
+    "heroku-postbuild": "yarn install"
   },
   "devDependencies": {
     "eslint": "^5.13.0",
