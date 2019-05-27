@@ -6,6 +6,13 @@
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
+  "docker": {
+    "username": "postgres",
+    "password": null,
+    "database": "swapi",
+    "host": "db",
+    "dialect": "postgres"
+  },
   "heroku": {
     "use_env_variable": "DATABASE_URL"
   },

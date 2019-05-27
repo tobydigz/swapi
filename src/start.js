@@ -16,9 +16,14 @@ const app = require('./app');
 const {
     loadMovies,
 } = require('./utils/MovieLoader');
+const {
+    runMigrations,
+} = require('./migrator');
 
 app.set('port', process.env.PORT || 8081);
 const server = app.listen(app.get('port'), async () => {
+    await runMigrations();
     await loadMovies();
+
     console.log(`Express running → PORT ${server.address().port}`);
 });
