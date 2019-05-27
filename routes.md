@@ -74,8 +74,7 @@ Query | limit | int | maximum number of comments to retrieve
 Name | Type | description
 ---- | ---- |  -----------
 comments | array | List object containing **Comment** objects
-next | int(nullable) | Next page number
-previous | int(nullable) | Previous Page Number
+total_count | int | Total count of comments
 
 ### Get Comments For Movie
 
@@ -83,7 +82,7 @@ This endpoint retrieves the list of all Comments for a particular movie
 
 Method | URL
 ------ | ---
-GET | api/swapi/v1/movie/:id/comments/
+GET | api/swapi/v1/movie/:id/comments
 
 #### Request Parameter
 
@@ -97,8 +96,7 @@ Query | limit | int | maximum number of comments to retrieve
 Name | Type | description
 ---- | ---- |  -----------
 comments | array | List object containing **Comment** objects
-next | int(nullable) | Next page number
-previous | int(nullable) | Previous Page Number
+total_count | int | Total count of comments
 
 ## Object Definitions
 
