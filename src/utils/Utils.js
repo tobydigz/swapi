@@ -82,10 +82,16 @@ const cmToFeet = (height) => {
     };
 };
 
+const getIp = req => (req.headers['x-forwarded-for'] || '').split(',').pop()
+    || req.connection.remoteAddress
+    || req.socket.remoteAddress
+    || req.connection.socket.remoteAddress;
+
 module.exports = {
     compareValues,
     filterCharacterByGender,
     cleanSwapiUrl,
     getPageFromUrl,
     cmToFeet,
+    getIp,
 };

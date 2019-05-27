@@ -36,6 +36,14 @@ router.get('/comments',
     ErrorController.handle,
     catchErrors(CommentsController.getComments));
 
+router.get('/movies/:id/comments',
+    [
+        validators.checkLimit,
+        validators.checkOffset,
+    ],
+    ErrorController.handle,
+    catchErrors(CommentsController.getCommentsForMovie));
+
 router.post('/comments',
     [
         validators.checkContent,

@@ -3,6 +3,8 @@ const {
     comment: Comment,
 } = require('../data/models');
 
+const Util = require('../utils/Utils');
+
 const getCommentCounts = async (movieIds) => {
     const countPromises = [];
     movieIds.forEach((movieId) => {
@@ -30,7 +32,10 @@ const getComments = async (req, res) => {
         offset,
     } = req.query;
 
-    const comments = await Comment.findAll({
+    const {
+        count: total_count,
+        rows: comments,
+    } = await Comment.findAndCountAll({
         limit: limit || 10,
         offset: offset || 0,
         order: [
@@ -39,6 +44,37 @@ const getComments = async (req, res) => {
     });
 
     return res.status(200).send({
+        total_count,
+        comments,
+    });
+};
+
+const getCommentsForMovie = async (req, res) => {
+    const {
+        limit,
+        offset,
+    } = req.query;
+
+    const {
+        id,
+    } = req.params;
+
+    const {
+        count: total_count,
+        rows: comments,
+    } = await Comment.findAndCountAll({
+        where: {
+            movie_id: id,
+        },
+        limit: limit || 10,
+        offset: offset || 0,
+        order: [
+            ['createdAt', 'DESC'],
+        ],
+    });
+
+    return res.status(200).send({
+        total_count,
         comments,
     });
 };
@@ -49,7 +85,7 @@ const postComment = async (req, res) => {
         movie_id,
     } = req.body;
 
-    const ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const ip_address = Util.getIp(req);
 
     await Comment.create({
         content,
@@ -66,4 +102,5 @@ module.exports = {
     getCommentCounts,
     getComments,
     postComment,
+    getCommentsForMovie,
 };
