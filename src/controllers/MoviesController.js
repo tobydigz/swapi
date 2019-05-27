@@ -31,7 +31,7 @@ const fetchMovies = async (page) => {
             title,
             opening_crawl,
             release_date,
-            comments: 0,
+            comment: 0,
         };
         movies.set(id, movie);
         movieIds.push(id);
@@ -70,7 +70,7 @@ const getMovies = async (req, res) => {
     return res.status(200).send({
         previous,
         next,
-        movies,
+        movies: moviesArray,
     });
 };
 

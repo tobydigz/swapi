@@ -1,14 +1,14 @@
 /* eslint-disable camelcase */
 const {
-    Comment,
-} = require('../models/Comment');
+    comment: Comment,
+} = require('../data/models');
 
 const getCommentCounts = async (movieIds) => {
     const countPromises = [];
     movieIds.forEach((movieId) => {
         const promise = Comment.count({
             where: {
-                id: movieId,
+                movie_id: movieId,
             },
         });
         countPromises.push(promise);
@@ -34,7 +34,7 @@ const getComments = async (req, res) => {
         limit: limit || 10,
         offset: offset || 0,
         order: [
-            ['created_at', 'DESC'],
+            ['createdAt', 'DESC'],
         ],
     });
 
