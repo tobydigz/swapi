@@ -3,7 +3,15 @@ const {
     body,
 } = require('express-validator/check');
 
-exports.checkPage = query('page').isNumeric();
+const isValidNumber = number => !Number.isNaN(Number(number));
+
+exports.checkPage = query('page')
+    .custom((page) => {
+        if (!page) {
+            return true;
+        }
+        return isValidNumber(page);
+    });
 
 exports.checkSort = query('sort')
     .custom((sort) => {
@@ -29,10 +37,25 @@ exports.checkFilter = query('filter')
         return (filter === 'male') || (filter === 'female') || (filter === 'unknown');
     });
 
-exports.checkLimit = query('limit').isNumeric()
-    .custom(limit => limit <= 20);
+exports.checkLimit = query('limit')
+    .custom((limit) => {
+        if (!limit) {
+            return true;
+        }
+        if (isValidNumber(limit)) {
+            return limit <= 20;
+        }
+        return false;
+    });
 
-exports.checkOffset = query('offset').isNumeric();
+exports.checkOffset = query('offset')
+    .custom((offset) => {
+        if (!offset) {
+            return true;
+        }
+        const number = Number(offset);
+        return isValidNumber(number);
+    });
 
 exports.checkContent = body('content').exists()
     .isLength({
