@@ -25,11 +25,9 @@ const storeMovieIdsInCache = async (movieIds) => {
 };
 
 const checkMovieId = body('movie_id')
+    .exists()
     .custom(async (movie_id) => {
         const ids = await getMovieIdsFromCache();
-        if (!ids) {
-            return false;
-        }
 
         return ids.has(movie_id);
     }).withMessage('Invalid Movie ID supplied');
