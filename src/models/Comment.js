@@ -20,6 +20,7 @@ Comment.init({
             isIP: true,
             notNull: true,
         },
+        allowNull: false,
     },
     content: {
         type: Sequelize.STRING,
@@ -27,6 +28,7 @@ Comment.init({
             len: [2, 500],
             notNull: true,
         },
+        allowNull: false,
     },
 }, {
     sequelize,
