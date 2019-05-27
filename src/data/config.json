@@ -6,6 +6,9 @@
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
+  "heroku": {
+    "use_env_variable": "DATABASE_URL"
+  },
   "production": {
     "username": "root",
     "password": null,
