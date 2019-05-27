@@ -1,7 +1,7 @@
 module.exports = {
     environment: process.env.NODE_ENV || 'development',
     logLevel: process.env.LOG_LEVEL || 'info',
-    TABLE_NAME: process.env.TABLE_NAME || '',
+    SWAPI_URL: 'https://swapi.co/api',
     DB_PASSWORD: process.env.DB_PASSWORD || '',
     DB_NAME: process.env.DB_NAME || '',
     DB_HOST: process.env.DB_HOST || '',

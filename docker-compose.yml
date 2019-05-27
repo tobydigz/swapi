@@ -1,21 +1,18 @@
 version: "3"
 services:
   app:
-    container_name: documenthub
-    image: documenthub
+    container_name: swapi
+    image: swapi
     build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
     depends_on:
-      - mssql
-    environment:
-      ACCEPT_EULA: mssql:Y
-      SA_PASSWORD: mssql:dev12345678
+      - db
 
-  mssql:
-    image: microsoft/mssql-server-linux
+
+  db:
+    image: postgres
     restart: unless-stopped
     environment:
-      ACCEPT_EULA: Y
-      SA_PASSWORD: B]nf{r6P?n
+      POSTGRES_DB: swapi

@@ -13,8 +13,12 @@ require('dotenv').config({
 
 // Start our app!
 const app = require('./app');
+const {
+    loadMovies,
+} = require('./utils/MovieLoader');
 
 app.set('port', process.env.PORT || 8081);
 const server = app.listen(app.get('port'), async () => {
+    await loadMovies();
     console.log(`Express running → PORT ${server.address().port}`);
 });
