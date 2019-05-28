@@ -11,8 +11,9 @@ RUN yarn global add pm2
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
+COPY yarn.lock /usr/src/app/
 RUN yarn install
-COPY /src /usr/src/app
-COPY /config /usr/src/app/config
+COPY /src /usr/src/app/src
+COPY .sequelizerc /usr/src/app/
 EXPOSE 8081
-CMD [ "pm2-runtime", "start" ,"pm2.json"]
+CMD [ "yarn", "run" ,"start"]

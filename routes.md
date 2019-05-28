@@ -41,7 +41,7 @@ ParamType| Name | Type | description
 -------- | ---- | ---- |  -----------
 Query | page | int | Page Number
 Query | sort | string | Accepts one of name, gender or height as a sort filter
-Query | order | string | Accepts ASC or DSC as order for sort. Ascending or Descending respectively. Defaults to ASC
+Query | order | string | Accepts *asc* or *desc* as order for sort. Ascending or Descending respectively. Defaults to *asc*
 Query | filter | string | Accepts male, female or unknown to filter by gender
 
 #### Response Object
@@ -52,7 +52,7 @@ characters | array | List object containing **Character** objects
 next | int(nullable) | Next page number
 previous | int(nullable) | Previous Page Number
 count | int| Count of Characters that pass filter for current Page set
-total_height | Height | Total height of all characters that pass filter for current Page set as a **Height** object
+heights | Height | Total height of all characters that pass filter for current Page set as a **Height** object
 
 ### Get Comments
 

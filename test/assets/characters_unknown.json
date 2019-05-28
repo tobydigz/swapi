@@ -1,0 +1,23 @@
+[
+  {
+    "name": "C-3PO",
+    "id": "2",
+    "height": "167",
+    "mass": "75",
+    "gender": null
+  },
+  {
+    "name": "R2-D2",
+    "id": "3",
+    "height": "96",
+    "mass": "32",
+    "gender": null
+  },
+  {
+    "name": "R5-D4",
+    "id": "8",
+    "height": "97",
+    "mass": "32",
+    "gender": null
+  }
+]

@@ -20,44 +20,27 @@ const compareValues = (key, order = 'asc') => (a, b) => {
     );
 };
 
-const filterCharacterByGender = (filter, shouldFilter, character) => {
-    if (!shouldFilter) {
-        return true;
-    }
-
-    const {
-        gender,
-    } = character;
-
-
-    if (filter === 'unknown' && gender === null) {
-        return true;
-    }
-    if (!gender) {
-        return false;
-    }
-    return filter.toLowerCase() === gender.toLowerCase();
-};
-
 const cleanSwapiUrl = (url) => {
-    const urlObject = new URL(url);
-
-    const path = urlObject.pathname;
-    if (!path) {
+    let urlObject;
+    try {
+        urlObject = new URL(url);
+    } catch (e) {
         return undefined;
     }
 
+    const path = urlObject.pathname;
+
     const pathArray = path.split('/');
 
-    if (pathArray.length < 1) {
+    if (pathArray.length <= 2) {
         return undefined;
     }
 
     let pathItem = pathArray[pathArray.length - 1];
-    if (!pathItem && pathArray.length >= 2) {
+    if (!pathItem) {
         pathItem = pathArray[pathArray.length - 2];
     }
-    return pathItem;
+    return pathItem || undefined;
 };
 
 const getPageFromUrl = (url) => {
@@ -76,11 +59,12 @@ const cmToFeet = (height) => {
     const feet = Math.floor(realFeet);
     const inches = Math.round((realFeet - feet) * 12);
     return {
-        type: 'Feet',
-        value: realFeet,
-        text_value: `${feet}ft and ${inches} inches`,
+        number: realFeet,
+        text: `${feet}ft and ${inches} inches`,
     };
 };
+
+const isValidNumber = value => !Number.isNaN(Number(value));
 
 const getIp = req => (req.headers['x-forwarded-for'] || '').split(',').pop()
     || req.connection.remoteAddress
@@ -88,8 +72,8 @@ const getIp = req => (req.headers['x-forwarded-for'] || '').split(',').pop()
     || req.connection.socket.remoteAddress;
 
 module.exports = {
+    isValidNumber,
     compareValues,
-    filterCharacterByGender,
     cleanSwapiUrl,
     getPageFromUrl,
     cmToFeet,

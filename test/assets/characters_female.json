@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Leia Organa",
+    "id": "5",
+    "height": "150",
+    "mass": "49",
+    "gender": "female"
+  },
+  {
+    "name": "Beru Whitesun lars",
+    "id": "7",
+    "height": "165",
+    "mass": "75",
+    "gender": "female"
+  }
+]

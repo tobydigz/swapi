@@ -3,7 +3,9 @@ const {
     body,
 } = require('express-validator/check');
 
-const isValidNumber = number => !Number.isNaN(Number(number));
+const {
+    isValidNumber,
+} = require('../utils/Utils');
 
 exports.checkPage = query('page')
     .custom((page) => {
