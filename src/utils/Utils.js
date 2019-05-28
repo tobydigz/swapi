@@ -21,24 +21,26 @@ const compareValues = (key, order = 'asc') => (a, b) => {
 };
 
 const cleanSwapiUrl = (url) => {
-    const urlObject = new URL(url);
-
-    const path = urlObject.pathname;
-    if (!path) {
+    let urlObject;
+    try {
+        urlObject = new URL(url);
+    } catch (e) {
         return undefined;
     }
 
+    const path = urlObject.pathname;
+
     const pathArray = path.split('/');
 
-    if (pathArray.length < 1) {
+    if (pathArray.length <= 2) {
         return undefined;
     }
 
     let pathItem = pathArray[pathArray.length - 1];
-    if (!pathItem && pathArray.length >= 2) {
+    if (!pathItem) {
         pathItem = pathArray[pathArray.length - 2];
     }
-    return pathItem;
+    return pathItem || undefined;
 };
 
 const getPageFromUrl = (url) => {
