@@ -70,7 +70,7 @@ const characterListMapper = (results, filter) => {
     };
 };
 
-const createHeightsObject = async (heightCm) => {
+const createHeightsObject = (heightCm) => {
     const {
         number: heightFt,
         text: heightFtText,
