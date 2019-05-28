@@ -21,7 +21,7 @@
     "eslint-plugin-import": "^2.16.0",
     "husky": "^2.3.0",
     "nodemon": "^1.18.9",
-    "tap": "^12.6.1"
+    "tap": "^14.0.0"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
