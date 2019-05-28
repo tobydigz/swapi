@@ -1,6 +1,14 @@
+const request = require('./SwapiRequest');
 const {
     getCommentCounts,
 } = require('./CommentUtils');
+const {
+    getPageFromUrl,
+} = require('./Utils');
+const {
+    storeMovieIdsInCache,
+} = require('../validators/MovieValidator');
+
 
 const mapMovies = (results) => {
     const movies = new Map();
@@ -30,7 +38,6 @@ const mapMovies = (results) => {
     };
 };
 
-
 const addCommentCounts = async (movies, movieIds) => {
     const counts = await getCommentCounts(movieIds);
     counts.forEach((value, key) => {
@@ -42,7 +49,40 @@ const addCommentCounts = async (movies, movieIds) => {
     return Array.from(movies.values());
 };
 
+const fetchMovies = async (page, moviesAlone = false) => {
+    const path = 'films';
+    const queryObject = {
+        page,
+    };
+    const {
+        results,
+        next,
+        previous,
+    } = await request.fetchData(path, queryObject);
+
+    const {
+        movies,
+        movieIds,
+    } = mapMovies(results);
+
+    await storeMovieIdsInCache(movieIds);
+
+    let moviesArray;
+    if (moviesAlone) {
+        moviesArray = Array.from(movies.values());
+    } else {
+        moviesArray = await addCommentCounts(movies, movieIds);
+    }
+
+    return {
+        movies: moviesArray,
+        movieIds,
+        next: getPageFromUrl(next),
+        previous: getPageFromUrl(previous),
+    };
+};
+
+
 module.exports = {
-    mapMovies,
-    addCommentCounts,
+    fetchMovies,
 };

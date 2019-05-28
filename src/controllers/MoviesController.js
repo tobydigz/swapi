@@ -1,9 +1,6 @@
-/* eslint-disable camelcase */
 const Utils = require('../utils/Utils');
-const request = require('../utils/SwapiRequest');
 const {
-    mapMovies,
-    addCommentCounts,
+    fetchMovies,
 } = require('../utils/MovieUtils');
 
 const getMovies = async (req, res) => {
@@ -11,28 +8,18 @@ const getMovies = async (req, res) => {
         page,
     } = req.query;
 
-    const path = 'films';
-    const queryObject = {
-        page,
-    };
-    const {
-        results,
-        next,
-        previous,
-    } = await request.fetchData(path, queryObject);
-
     const {
         movies,
-        movieIds,
-    } = mapMovies(results);
+        next,
+        previous,
+    } = await fetchMovies(page);
 
-    const moviesArray = addCommentCounts(movies, movieIds);
-    moviesArray.sort(Utils.compareValues('release_date'));
+    movies.sort(Utils.compareValues('release_date'));
 
     return res.status(200).send({
-        previous: Utils.getPageFromUrl(previous),
-        next: Utils.getPageFromUrl(next),
-        movies: moviesArray,
+        previous,
+        next,
+        movies,
     });
 };
 
