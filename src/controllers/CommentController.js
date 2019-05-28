@@ -1,30 +1,8 @@
-/* eslint-disable camelcase */
-const {
-    comment: Comment,
-} = require('../data/models');
-
 const Util = require('../utils/Utils');
-
-const getCommentCounts = async (movieIds) => {
-    const countPromises = [];
-    movieIds.forEach((movieId) => {
-        const promise = Comment.count({
-            where: {
-                movie_id: movieId,
-            },
-        });
-        countPromises.push(promise);
-    });
-
-    const counts = await Promise.all(countPromises);
-
-    const results = new Map();
-
-    counts.forEach((count, i) => results.set(movieIds[i], count));
-
-    return results;
-};
-
+const {
+    getCommentAndCounts,
+    saveComment,
+} = require('../utils/CommentUtils');
 
 const getComments = async (req, res) => {
     const {
@@ -33,15 +11,9 @@ const getComments = async (req, res) => {
     } = req.query;
 
     const {
-        count: total_count,
-        rows: comments,
-    } = await Comment.findAndCountAll({
-        limit: limit || 10,
-        offset: offset || 0,
-        order: [
-            ['createdAt', 'DESC'],
-        ],
-    });
+        total_count,
+        comments,
+    } = await getCommentAndCounts(limit, offset);
 
     return res.status(200).send({
         total_count,
@@ -60,18 +32,12 @@ const getCommentsForMovie = async (req, res) => {
     } = req.params;
 
     const {
-        count: total_count,
-        rows: comments,
-    } = await Comment.findAndCountAll({
-        where: {
+        total_count,
+        comments,
+    } = await getCommentAndCounts(limit, offset,
+        {
             movie_id: id,
-        },
-        limit: limit || 10,
-        offset: offset || 0,
-        order: [
-            ['createdAt', 'DESC'],
-        ],
-    });
+        });
 
     return res.status(200).send({
         total_count,
@@ -87,11 +53,7 @@ const postComment = async (req, res) => {
 
     const ip_address = Util.getIp(req);
 
-    await Comment.create({
-        content,
-        movie_id,
-        ip_address,
-    });
+    await saveComment(content, movie_id, ip_address);
 
     res.status(200).send({
         message: 'Comment Posted Successfully',
@@ -99,7 +61,6 @@ const postComment = async (req, res) => {
 };
 
 module.exports = {
-    getCommentCounts,
     getComments,
     postComment,
     getCommentsForMovie,
