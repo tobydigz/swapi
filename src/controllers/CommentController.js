@@ -11,9 +11,9 @@ const getComments = async (req, res) => {
     } = req.query;
 
     const {
-        count: total_count,
-        rows: comments,
-    } = await getCommentAndCounts((limit || 10), (offset || 10));
+        total_count,
+        comments,
+    } = await getCommentAndCounts(limit, offset);
 
     return res.status(200).send({
         total_count,
@@ -32,9 +32,9 @@ const getCommentsForMovie = async (req, res) => {
     } = req.params;
 
     const {
-        count: total_count,
-        rows: comments,
-    } = await await getCommentAndCounts((limit || 10), (offset || 10),
+        total_count,
+        comments,
+    } = await getCommentAndCounts(limit, offset,
         {
             movie_id: id,
         });
