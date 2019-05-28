@@ -14,7 +14,6 @@ COPY package.json /usr/src/app/
 COPY yarn.lock /usr/src/app/
 RUN yarn install
 COPY /src /usr/src/app/src
-COPY /config /usr/src/app/config
 COPY .sequelizerc /usr/src/app/
 EXPOSE 8081
 CMD [ "yarn", "run" ,"start"]

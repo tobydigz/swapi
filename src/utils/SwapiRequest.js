@@ -1,9 +1,6 @@
 const request = require('request-promise-native');
-const config = require('config');
 
-const {
-    SWAPI_URL: endpoint,
-} = config;
+const endpoint = process.env.SWAPI_URL || 'https://swapi.co/api';
 
 const fetchData = async (path, queryObject) => {
     const options = {

@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const addRequestId = require('express-request-id')();
-const config = require('config');
 const errorHandler = require('./handlers/ErrorHandler');
 const logger = require('./utils/logger');
 const routes = require('./routes/index');
@@ -42,7 +41,7 @@ app.use('/api/swapi/v1/',
 
 app.use(errorHandler.notFound);
 
-if (config.environment === 'development') {
+if (process.env.NODE_ENV === 'development') {
     app.use(errorHandler.developmentErrors);
 }
 

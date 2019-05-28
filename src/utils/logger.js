@@ -1,9 +1,6 @@
 const bunyan = require('bunyan');
-const config = require('config');
 
-const {
-    logLevel,
-} = config;
+const logLevel = process.env.LOG_LEVEL || 'info';
 
 function reqSerializer(req) {
     const {
