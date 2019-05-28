@@ -72,3 +72,10 @@ tap.test('Character Mapper Test With Filter Unknown', async () => {
 
     tap.same(results, characters_unknown);
 });
+
+tap.test('Height Object Creator', async () => {
+    const [ftHeight, cmHeight] = utils.createHeightsObject(180);
+
+    tap.same(ftHeight.value, 5.9055);
+    tap.same(cmHeight.value, 180);
+});
