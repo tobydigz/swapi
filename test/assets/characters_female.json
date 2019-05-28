@@ -1,33 +1,5 @@
 [
   {
-    "name": "Luke Skywalker",
-    "id": "1",
-    "height": "172",
-    "mass": "77",
-    "gender": "male"
-  },
-  {
-    "name": "C-3PO",
-    "id": "2",
-    "height": "167",
-    "mass": "75",
-    "gender": null
-  },
-  {
-    "name": "R2-D2",
-    "id": "3",
-    "height": "96",
-    "mass": "32",
-    "gender": null
-  },
-  {
-    "name": "Darth Vader",
-    "id": "4",
-    "height": "202",
-    "mass": "136",
-    "gender": "male"
-  },
-  {
     "name": "Leia Organa",
     "id": "5",
     "height": "150",
@@ -35,38 +7,10 @@
     "gender": "female"
   },
   {
-    "name": "Owen Lars",
-    "id": "6",
-    "height": "178",
-    "mass": "120",
-    "gender": "male"
-  },
-  {
     "name": "Beru Whitesun lars",
     "id": "7",
     "height": "165",
     "mass": "75",
     "gender": "female"
-  },
-  {
-    "name": "R5-D4",
-    "id": "8",
-    "height": "97",
-    "mass": "32",
-    "gender": null
-  },
-  {
-    "name": "Biggs Darklighter",
-    "id": "9",
-    "height": "183",
-    "mass": "84",
-    "gender": "male"
-  },
-  {
-    "name": "Obi-Wan Kenobi",
-    "id": "10",
-    "height": "182",
-    "mass": "77",
-    "gender": "male"
   }
 ]
