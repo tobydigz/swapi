@@ -1,11 +1,16 @@
 /* eslint-disable camelcase */
-const request = require('../utils/SwapiRequest');
 const Utils = require('../utils/Utils');
+const request = require('../utils/SwapiRequest');
 const {
-    getCommentCounts,
-} = require('./CommentController');
+    mapMovies,
+    addCommentCounts,
+} = require('../utils/MovieUtils');
 
-const fetchMovies = async (page) => {
+const getMovies = async (req, res) => {
+    const {
+        page,
+    } = req.query;
+
     const path = 'films';
     const queryObject = {
         page,
@@ -16,65 +21,21 @@ const fetchMovies = async (page) => {
         previous,
     } = await request.fetchData(path, queryObject);
 
-    const movies = new Map();
-    const movieIds = [];
-
-    results.forEach((result) => {
-        const {
-            title,
-            episode_id: id,
-            opening_crawl,
-            release_date,
-        } = result;
-        const movie = {
-            id,
-            title,
-            opening_crawl,
-            release_date,
-            comment: 0,
-        };
-        movies.set(id, movie);
-        movieIds.push(id);
-    });
-
-    return {
-        movies,
-        movieIds,
-        previous: Utils.getPageFromUrl(previous),
-        next: Utils.getPageFromUrl(next),
-    };
-};
-
-const getMovies = async (req, res) => {
-    const {
-        page,
-    } = req.query;
-
     const {
         movies,
         movieIds,
-        next,
-        previous,
-    } = await fetchMovies(page);
+    } = mapMovies(results);
 
-    const counts = await getCommentCounts(movieIds);
-    counts.forEach((value, key) => {
-        const movie = movies.get(key);
-        if (movie) {
-            movie.comment = value;
-        }
-    });
-    const moviesArray = Array.from(movies.values());
+    const moviesArray = addCommentCounts(movies, movieIds);
     moviesArray.sort(Utils.compareValues('release_date'));
 
     return res.status(200).send({
-        previous,
-        next,
+        previous: Utils.getPageFromUrl(previous),
+        next: Utils.getPageFromUrl(next),
         movies: moviesArray,
     });
 };
 
 module.exports = {
     getMovies,
-    fetchMovies,
 };
