@@ -2,7 +2,7 @@ const Util = require('../utils/Utils');
 const {
     getCommentAndCounts,
     saveComment,
-} = require('../utils/CommentUtils');
+} = require('../data/sources/CommentSource');
 
 const getComments = async (req, res) => {
     const {

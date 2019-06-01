@@ -1,7 +1,7 @@
 const Utils = require('../utils/Utils');
 const {
     fetchMovies,
-} = require('../utils/MovieUtils');
+} = require('../data/sources/MovieSource');
 
 const getMovies = async (req, res) => {
     const {
