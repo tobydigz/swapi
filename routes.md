@@ -13,68 +13,36 @@ Method | URL
 ------ | ---
 GET | api/swapi/v1/movies
 
-#### Request Parameter
-
-ParamType| Name | Type | description
--------- | ---- | ---- |  -----------
-Query | page | int | Page Number
-
 #### Response Object
 
 Name | Type | description
 ---- | ---- |  -----------
 movies | array | List object containing **Movie** objects
-next | int(nullable) | Next page number
-previous | int(nullable) | Previous Page Number
 
-### Get Characters
+### Get Characters For Movie
 
-This endpoint retrieves the list of all Star Wars Movies Characters
+This endpoint retrieves the list of Star Wars Movies Characters for a particular movie
 
 Method | URL
 ------ | ---
-GET | api/swapi/v1/characters
+GET | api/swapi/v1/movie/:id/characters
 
 #### Request Parameter
 
 ParamType| Name | Type | description
 -------- | ---- | ---- |  -----------
-Query | page | int | Page Number
+URL Parameter | id | int | Movie ID
 Query | sort | string | Accepts one of name, gender or height as a sort filter
 Query | order | string | Accepts *asc* or *desc* as order for sort. Ascending or Descending respectively. Defaults to *asc*
-Query | filter | string | Accepts male, female or unknown to filter by gender
+Query | filter | string | Accepts male, female, hermaphrodite, n/a or none to filter by gender
 
 #### Response Object
 
 Name | Type | description
 ---- | ---- |  -----------
 characters | array | List object containing **Character** objects
-next | int(nullable) | Next page number
-previous | int(nullable) | Previous Page Number
 count | int| Count of Characters that pass filter for current Page set
 heights | Height | Total height of all characters that pass filter for current Page set as a **Height** object
-
-### Get Comments
-
-This endpoint retrieves the list of all Comments
-
-Method | URL
------- | ---
-GET | api/swapi/v1/comments
-
-#### Request Parameter
-
-ParamType| Name | Type | description
--------- | ---- | ---- |  -----------
-Query | offset | int | Number of comments to skip while fetching
-Query | limit | int | maximum number of comments to retrieve
-
-#### Response Object
-
-Name | Type | description
----- | ---- |  -----------
-comments | array | List object containing **Comment** objects
-total_count | int | Total count of comments
 
 ### Get Comments For Movie
 
@@ -88,6 +56,7 @@ GET | api/swapi/v1/movie/:id/comments
 
 ParamType| Name | Type | description
 -------- | ---- | ---- |  -----------
+URL Parameter | id | int | Movie ID
 Query | offset | int | Number of comments to skip while fetching
 Query | limit | int | maximum number of comments to retrieve
 
@@ -108,7 +77,7 @@ id | integer | The id of this film
 title | string | The title of this film
 release_date | string | The ISO 8601 date format of film release at original creator country
 opening_crawl | string | The opening paragraphs at the beginning of this film
-comment_count | int | The number of comments for this film
+comments | int | The number of comments for this film
 
 ### Character
 

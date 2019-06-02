@@ -11,16 +11,24 @@ const resolveGender = (gender) => {
     if (gender.toLowerCase() === 'female') {
         return 'female';
     }
+
+    if (gender.toLowerCase() === 'hermaphrodite') {
+        return 'hermaphrodite';
+    }
+
+    if (gender.toLowerCase() === 'n/a') {
+        return 'n/a';
+    }
+
+    if (gender.toLowerCase() === 'none') {
+        return 'none';
+    }
     return null;
 };
 
 const resolveNumberField = number => ((isValidNumber(number)) ? number : null);
 
-const filterCharacterByGender = (filter, shouldFilter, character) => {
-    if (!shouldFilter) {
-        return true;
-    }
-
+const filterCharacterByGender = filter => (character) => {
     const {
         gender,
     } = character;
@@ -53,23 +61,6 @@ const characterMapper = (result) => {
     };
 };
 
-const characterListMapper = (results, filter) => {
-    const characters = [];
-    let totalHeight = 0;
-    const shouldFilter = !!filter;
-    results.forEach((result) => {
-        const character = characterMapper(result);
-        if (filterCharacterByGender(filter, shouldFilter, character)) {
-            characters.push(character);
-            totalHeight += Number(character.height);
-        }
-    });
-    return {
-        characters,
-        totalHeight,
-    };
-};
-
 const createHeightsObject = (heightCm) => {
     const {
         number: heightFt,
@@ -93,8 +84,7 @@ const createHeightsObject = (heightCm) => {
 };
 
 module.exports = {
-    resolveGender,
-    resolveNumberField,
-    characterListMapper,
+    characterMapper,
     createHeightsObject,
+    filterCharacterByGender,
 };

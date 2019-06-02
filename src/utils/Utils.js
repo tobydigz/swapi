@@ -1,13 +1,23 @@
+const isValidNumber = value => !Number.isNaN(Number(value));
+
 const compareValues = (key, order = 'asc') => (a, b) => {
     if (!Object.prototype.hasOwnProperty.call(a, key)
         || !Object.prototype.hasOwnProperty.call(b, key)) {
         return 0;
     }
 
-    const varA = (typeof a[key] === 'string')
+    let varA = (typeof a[key] === 'string')
         ? a[key].toUpperCase() : a[key];
-    const varB = (typeof b[key] === 'string')
+    let varB = (typeof b[key] === 'string')
         ? b[key].toUpperCase() : b[key];
+
+    if (isValidNumber(varA)) {
+        varA = Number(varA);
+    }
+
+    if (isValidNumber(varB)) {
+        varB = Number(varB);
+    }
 
     let comparison = 0;
     if (varA > varB) {
@@ -63,8 +73,6 @@ const cmToFeet = (height) => {
         text: `${feet}ft and ${inches} inches`,
     };
 };
-
-const isValidNumber = value => !Number.isNaN(Number(value));
 
 const getIp = req => (req.headers['x-forwarded-for'] || '').split(',').pop()
     || req.connection.remoteAddress

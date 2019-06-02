@@ -1,6 +1,6 @@
 {
   "name": "swapi",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Star Wars Api Service",
   "main": "start.js",
   "author": "Oloruntobi Allen <oloruntobi.allen@gmail.com>",
@@ -34,6 +34,7 @@
     "node-cache-promise": "^1.0.0",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.2",
+    "redis": "^2.8.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
     "sequelize": "^5.8.6",
