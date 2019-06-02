@@ -1,15 +1,12 @@
 const {
     fetchMovies,
-} = require('./MovieUtils');
+    storeMoviesInCache,
+} = require('../data/sources/MovieSource');
 
-const loadMovies = async (page) => {
-    const {
-        next,
-    } = await fetchMovies(page, true);
+const loadMovies = async () => {
+    const movies = await fetchMovies(true);
 
-    if (next) {
-        await loadMovies(next);
-    }
+    await storeMoviesInCache(movies);
 };
 
 module.exports = {

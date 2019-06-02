@@ -1,6 +1,6 @@
 const {
     comment: Comment,
-} = require('../data/models');
+} = require('../models');
 
 const getCommentCounts = async (movieIds) => {
     const countPromises = [];

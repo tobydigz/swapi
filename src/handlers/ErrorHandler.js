@@ -26,7 +26,7 @@ exports.notFound = (_req, _res, next) => {
 exports.developmentErrors = (err, req, res, next) => {
     const errorStack = err.stack || '';
     const errorDetails = {
-        message: err.message,
+        message: err.message || 'ERROR',
         code: err.status,
         stackHighlighted: errorStack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>'),
     };

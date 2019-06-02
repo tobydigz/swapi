@@ -9,10 +9,12 @@ services:
     restart: unless-stopped
     environment:
       NODE_ENV: docker
+      REDIS_URL: redis://cache
     ports:
         - "8081:8081"
     depends_on:
       - db
+      - redis
 
 
   db:
@@ -20,3 +22,9 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: swapi
+
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379

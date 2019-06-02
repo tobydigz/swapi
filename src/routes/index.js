@@ -12,39 +12,28 @@ const {
 } = require('../handlers/ErrorHandler');
 
 router.get('/movies',
-    [
-        validators.checkPage,
-    ],
-    ErrorController.handle,
     catchErrors(MovieController.getMovies));
 
-router.get('/characters',
+router.get('/movies/:id/characters',
     [
-        validators.checkPage,
         validators.checkFilter,
         validators.checkSort,
         validators.checkOrder,
+        movieValidators.checkMovieId,
     ],
     ErrorController.handle,
     catchErrors(CharactersController.getCharacters));
-
-router.get('/comments',
-    [
-        validators.checkLimit,
-        validators.checkOffset,
-    ],
-    ErrorController.handle,
-    catchErrors(CommentsController.getComments));
 
 router.get('/movies/:id/comments',
     [
         validators.checkLimit,
         validators.checkOffset,
+        movieValidators.checkMovieId,
     ],
     ErrorController.handle,
     catchErrors(CommentsController.getCommentsForMovie));
 
-router.post('/comments',
+router.post('/movies/:id/comments',
     [
         validators.checkContent,
         movieValidators.checkMovieId,

@@ -7,14 +7,6 @@ const {
     isValidNumber,
 } = require('../utils/Utils');
 
-exports.checkPage = query('page')
-    .custom((page) => {
-        if (!page) {
-            return true;
-        }
-        return isValidNumber(page);
-    });
-
 exports.checkSort = query('sort')
     .custom((sort) => {
         if (!sort) {
