@@ -28,7 +28,11 @@ exports.checkFilter = query('filter')
         if (!filter) {
             return true;
         }
-        return (filter === 'male') || (filter === 'female') || (filter === 'unknown');
+        return (filter === 'male')
+            || (filter === 'female')
+            || (filter === 'hermaphrodite')
+            || (filter === 'n/a')
+            || (filter === 'none');
     });
 
 exports.checkLimit = query('limit')

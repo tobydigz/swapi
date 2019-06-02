@@ -41,14 +41,13 @@ const fetchCharacters = async (ids, sort, order, filter) => {
         characterPromises.push(fetchCharacter(id));
     });
 
-    const characters = await Promise.all(characterPromises);
-
-    if (sort) {
-        characters.sort(compareValues(sort, order));
-    }
+    let characters = await Promise.all(characterPromises);
 
     if (filter) {
-        return characters.filter(filterCharacterByGender);
+        characters = characters.filter(filterCharacterByGender(filter));
+    }
+    if (sort) {
+        characters.sort(compareValues(sort, order));
     }
 
     return characters;
