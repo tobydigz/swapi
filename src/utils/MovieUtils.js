@@ -18,7 +18,7 @@ const mapMovie = (result) => {
         title,
         opening_crawl,
         release_date,
-        comment: 0,
+        comments: 0,
         characters: characters.map(mapCharacterId),
     };
 };

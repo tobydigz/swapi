@@ -4,11 +4,7 @@ const {
 } = require('../data/sources/MovieSource');
 
 const getMovies = async (req, res) => {
-    const {
-        page,
-    } = req.query;
-
-    const movies = await fetchMovies(page);
+    const movies = await fetchMovies();
 
     movies.sort(Utils.compareValues('release_date'));
 
