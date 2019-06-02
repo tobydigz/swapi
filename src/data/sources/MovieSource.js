@@ -70,12 +70,15 @@ const fetchMoviesFromCache = async () => {
 };
 
 const addCommentCounts = async (movies) => {
-    const movieIds = movies.map(movie => movie.id);
-    const counts = await getCommentCounts(movieIds);
+    const movieMap = new Map();
+    movies.forEach((movie) => {
+        movieMap.set(movie.id, movie);
+    });
+    const counts = await getCommentCounts(Array.from(movieMap.keys()));
     counts.forEach((value, key) => {
-        const movie = movies.get(key);
+        const movie = movieMap.get(key);
         if (movie) {
-            movie.comment = value;
+            movie.comments = value;
         }
     });
     return movies;

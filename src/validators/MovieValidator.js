@@ -1,15 +1,15 @@
 const {
-    body,
+    param,
 } = require('express-validator/check');
 
 const {
     fetchMovie,
 } = require('../data/sources/MovieSource');
 
-const checkMovieId = body('movie_id')
+const checkMovieId = param('id')
     .exists()
-    .custom(async (movie_id) => {
-        const movie = await fetchMovie(movie_id);
+    .custom(async (id) => {
+        const movie = await fetchMovie(id);
 
         return !!movie;
     }).withMessage('Invalid Movie ID supplied');
