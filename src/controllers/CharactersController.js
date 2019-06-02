@@ -1,41 +1,41 @@
-const request = require('../utils/SwapiRequest');
-const Utils = require('../utils/Utils');
 const {
-    characterListMapper,
     createHeightsObject,
 } = require('../utils/CharacterUtils');
+const {
+    fetchMovie,
+} = require('../data/sources/MovieSource');
+
+const {
+    fetchCharacters,
+} = require('../data/sources/CharacterSource');
 
 exports.getCharacters = async (req, res) => {
     const {
-        page,
         sort,
         order,
         filter,
     } = req.query;
-    const path = 'people';
-
-    const queryObject = {
-        page,
-    };
 
     const {
-        results,
-        next,
-        previous,
-    } = await request.fetchData(path, queryObject);
+        id,
+    } = req.params;
 
     const {
-        characters,
-        totalHeight,
-    } = characterListMapper(results, filter);
+        characters: characterIds,
+    } = await fetchMovie(id);
 
-    characters.sort(Utils.compareValues(sort, order));
+    const characters = fetchCharacters(characterIds, sort, order, filter);
+    let totalHeight = 0;
 
+    characters.forEach((character) => {
+        const {
+            height,
+        } = character;
+        totalHeight += Number(height);
+    });
     const heights = createHeightsObject(totalHeight);
 
     return res.status(200).send({
-        previous: Utils.getPageFromUrl(previous),
-        next: Utils.getPageFromUrl(next),
         count: characters.length,
         heights,
         characters,
