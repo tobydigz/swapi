@@ -46,9 +46,14 @@ const fetchCharacters = async (ids, sort, order, filter) => {
     if (filter) {
         characters = characters.filter(filterCharacterByGender(filter));
     }
+    if (sort && sort !== 'name') {
+        characters.sort(compareValues('name', order));
+    }
+
     if (sort) {
         characters.sort(compareValues(sort, order));
     }
+
 
     return characters;
 };
