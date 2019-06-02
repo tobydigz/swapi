@@ -4,23 +4,6 @@ const {
     saveComment,
 } = require('../data/sources/CommentSource');
 
-const getComments = async (req, res) => {
-    const {
-        limit,
-        offset,
-    } = req.query;
-
-    const {
-        total_count,
-        comments,
-    } = await getCommentAndCounts(limit, offset);
-
-    return res.status(200).send({
-        total_count,
-        comments,
-    });
-};
-
 const getCommentsForMovie = async (req, res) => {
     const {
         limit,
@@ -48,12 +31,15 @@ const getCommentsForMovie = async (req, res) => {
 const postComment = async (req, res) => {
     const {
         content,
-        movie_id,
     } = req.body;
+
+    const {
+        id,
+    } = req.params;
 
     const ip_address = Util.getIp(req);
 
-    await saveComment(content, movie_id, ip_address);
+    await saveComment(content, id, ip_address);
 
     res.status(200).send({
         message: 'Comment Posted Successfully',
@@ -61,7 +47,6 @@ const postComment = async (req, res) => {
 };
 
 module.exports = {
-    getComments,
     postComment,
     getCommentsForMovie,
 };
