@@ -28,7 +28,7 @@ const fetchCharacter = async (id) => {
         return JSON.parse(character);
     }
 
-    const apiCharacter = await fetchCharacterFromApi(character);
+    const apiCharacter = await fetchCharacterFromApi(id);
 
     character = characterMapper(apiCharacter);
     setAsync(characterId, JSON.stringify(character));

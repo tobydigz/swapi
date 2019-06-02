@@ -24,7 +24,7 @@ exports.getCharacters = async (req, res) => {
         characters: characterIds,
     } = await fetchMovie(id);
 
-    const characters = fetchCharacters(characterIds, sort, order, filter);
+    const characters = await fetchCharacters(characterIds, sort, order, filter);
     let totalHeight = 0;
 
     characters.forEach((character) => {
