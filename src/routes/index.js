@@ -12,15 +12,11 @@ const {
 } = require('../handlers/ErrorHandler');
 
 router.get('/movies',
-    [
-        validators.checkPage,
-    ],
     ErrorController.handle,
     catchErrors(MovieController.getMovies));
 
 router.get('/movies/:id/characters',
     [
-        validators.checkPage,
         validators.checkFilter,
         validators.checkSort,
         validators.checkOrder,
